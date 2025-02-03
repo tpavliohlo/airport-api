@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Flight(models.Model):
     route = models.ForeignKey("Route", on_delete=models.CASCADE, related_name="flights")
@@ -37,13 +38,13 @@ class Ticket(models.Model):
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="users")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # def __str__(self):
     #     return self.user.username
 
 
-class Route:
+class Route(models.Model):
     source = models.ForeignKey("Airport", on_delete=models.CASCADE, related_name="sources")
     destination = models.ForeignKey("Airport", on_delete=models.CASCADE, related_name="destinations")
     distance = models.IntegerField()
