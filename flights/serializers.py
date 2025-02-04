@@ -4,6 +4,8 @@ from flights.models import Flight, Airplane, AirplaneType, Ticket, Order, Route,
 
 
 class FlightSerializer(serializers.ModelSerializer):
+    route = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Flight
         fields = '__all__'

@@ -9,7 +9,7 @@ class Flight(models.Model):
     crew = models.ManyToManyField("Crew", related_name="crew")
 
     def __str__(self):
-        return self.route
+        return str(self.route)
 
 
 class Airplane(models.Model):
@@ -62,3 +62,6 @@ class Airport(models.Model):
 class Crew(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
