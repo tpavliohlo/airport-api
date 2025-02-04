@@ -1,3 +1,15 @@
 from django.shortcuts import render
+from rest_framework import viewsets, mixins
+from rest_framework.viewsets import GenericViewSet
 
-# Create your views here.
+from flights.models import Flight
+from flights.serializers import FlightSerializer
+
+
+class FlightViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
+    queryset = Flight.objects.all()
+    serializer_class = FlightSerializer
