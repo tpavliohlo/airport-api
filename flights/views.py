@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.viewsets import GenericViewSet
 
-from flights.models import Flight, Airplane, AirplaneType, Ticket
-from flights.serializers import FlightSerializer, AirplaneSerializer, AirplaneTypeSerializer, TicketSerializer
+from flights.models import Flight, Airplane, AirplaneType, Ticket, Order
+from flights.serializers import FlightSerializer, AirplaneSerializer, AirplaneTypeSerializer, TicketSerializer, \
+    OrderSerializer
 
 
 class FlightViewSet(
@@ -41,3 +42,11 @@ class TicketViewSet(
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
 
+
+class OrderViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
