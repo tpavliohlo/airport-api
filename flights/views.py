@@ -2,9 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.viewsets import GenericViewSet
 
-from flights.models import Flight, Airplane, AirplaneType, Ticket, Order, Route
+from flights.models import Flight, Airplane, AirplaneType, Ticket, Order, Route, Airport
 from flights.serializers import FlightSerializer, AirplaneSerializer, AirplaneTypeSerializer, TicketSerializer, \
-    OrderSerializer, RouteSerializer
+    OrderSerializer, RouteSerializer, AirportSerializer
 
 
 class FlightViewSet(
@@ -59,3 +59,12 @@ class RouteViewSet(
 ):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
+
+
+class AirportViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet,
+):
+    queryset = Airport.objects.all()
+    serializer_class = AirportSerializer
