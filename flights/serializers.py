@@ -3,14 +3,6 @@ from rest_framework import serializers
 from flights.models import Flight, Airplane, AirplaneType, Ticket, Order, Route, Airport, Crew
 
 
-class FlightSerializer(serializers.ModelSerializer):
-    route = serializers.PrimaryKeyRelatedField(queryset=Route.objects.all())
-
-    class Meta:
-        model = Flight
-        fields = '__all__'
-
-
 class AirplaneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Airplane
@@ -35,15 +27,18 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class RouteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Route
-        fields = '__all__'
-
-
 class AirportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Airport
+        fields = '__all__'
+
+
+class RouteSerializer(serializers.ModelSerializer):
+    source = AirportSerializer(read_only=True)  # Show source airport details
+    destination = AirportSerializer(read_only=True)
+
+    class Meta:
+        model = Route
         fields = '__all__'
 
 
@@ -51,3 +46,13 @@ class CrewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Crew
         fields = '__all__'
+
+
+class FlightSerializer(serializers.ModelSerializer):
+    #route = serializers.PrimaryKeyRelatedField(queryset=Route.objects.all())
+    route = RouteSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Flight
+        fields = '__all__'
+
