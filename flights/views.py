@@ -8,27 +8,21 @@ from flights.serializers import FlightSerializer, AirplaneSerializer, AirplaneTy
 
 
 class FlightViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
+    viewsets.ModelViewSet
 ):
     queryset = Flight.objects.all()
     serializer_class = FlightSerializer
 
 
 class AirplaneViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
+viewsets.ModelViewSet
 ):
     queryset = Airplane.objects.all()
     serializer_class = AirplaneSerializer
 
 
 class AirplaneTypesViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
+viewsets.ModelViewSet
 ):
     queryset = AirplaneType.objects.all()
     serializer_class = AirplaneTypeSerializer
@@ -53,27 +47,21 @@ class OrderViewSet(
 
 
 class RouteViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
+viewsets.ModelViewSet
 ):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
 
 
 class AirportViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
+    viewsets.ModelViewSet
 ):
     queryset = Airport.objects.all()
     serializer_class = AirportSerializer
 
 
 class CrewViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    GenericViewSet,
+    viewsets.ModelViewSet
 ):
     queryset = Crew.objects.all()
     serializer_class = CrewSerializer
