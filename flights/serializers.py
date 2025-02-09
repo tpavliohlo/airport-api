@@ -9,6 +9,13 @@ class AirplaneSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AirplaneNameSerializer(serializers.ModelSerializer):
+    """Only show the name of the Airplane."""
+    class Meta:
+        model = Airplane
+        fields = ["name"]
+
+
 class AirplaneTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AirplaneType
@@ -51,6 +58,7 @@ class CrewSerializer(serializers.ModelSerializer):
 class FlightSerializer(serializers.ModelSerializer):
     #route = serializers.PrimaryKeyRelatedField(queryset=Route.objects.all())
     route = RouteSerializer(many=False, read_only=True)
+    airplane = AirplaneNameSerializer(many=False, read_only=True)
 
     class Meta:
         model = Flight
