@@ -40,8 +40,8 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return self.user.username
+    def __str__(self):
+        return str(self.user) + str( self.created_at)
 
 
 class Route(models.Model):
