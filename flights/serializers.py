@@ -56,7 +56,6 @@ class CrewSerializer(serializers.ModelSerializer):
 
 
 class FlightSerializer(serializers.ModelSerializer):
-    #route = serializers.PrimaryKeyRelatedField(queryset=Route.objects.all())
     source = serializers.CharField(source="route.source.name", read_only=True)
     destination = serializers.CharField(source="route.destination.name", read_only=True)
     airplane = AirplaneNameSerializer(many=False, read_only=True)
@@ -64,3 +63,13 @@ class FlightSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flight
         fields = '__all__'
+
+
+class FlightListSerializer(serializers.ModelSerializer):
+    source = serializers.CharField(source="route.source.name", read_only=True)
+    destination = serializers.CharField(source="route.destination.name", read_only=True)
+    airplane = AirplaneNameSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Flight
+        fields = ("source", "destination", "airplane", "departure_time", "arrival_time")
